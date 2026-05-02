@@ -1,1 +1,1 @@
-# scalable-ml-system-template
+# mlflow-on-k8s
