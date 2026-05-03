@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ml-pod
+  namespace: ml-dev
+  labels:
+    app: mlflow
+spec:
+  containers:
+  - name: ml-container
+    image: busybox
+    command: ["sh", "-c", "echo EXPERIMENT=$MLFLOW_EXPERIMENT_NAME && echo LR=$LEARNING_RATE && echo KEY=$AWS_ACCESS_KEY && sleep 3600"]
+    env:
+    # ConfigMap에서 주입
+    - name: MLFLOW_EXPERIMENT_NAME
+      valueFrom:
+        configMapKeyRef:
+          name: ml-config
+          key: MLFLOW_EXPERIMENT_NAME
+    - name: LEARNING_RATE
+      valueFrom:
+        configMapKeyRef:
+          name: ml-config
+          key: LEARNING_RATE
+
+    # Secret에서 주입
+    - name: AWS_ACCESS_KEY
+      valueFrom:
+        secretKeyRef:
+          name: ml-secret
+          key: AWS_ACCESS_KEY
