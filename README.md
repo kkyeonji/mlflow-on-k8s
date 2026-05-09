@@ -103,3 +103,6 @@ python tools/mlflow-practice.py
 | Artifact store | MinIO via S3-compatible API |
 | Artifact upload | Proxied through MLflow server (`--serve-artifacts`) |
 | Client access | `kubectl port-forward` to MLflow service only |
+
+## MLflow on Kubernetes (Deployed UI)
+![deployed mlflow ui](docs/images/mlflow-release.png)
